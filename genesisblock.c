@@ -1,4 +1,3 @@
-// Copyright "Remember remember the 5th of November" 2013
 
 #include <stdlib.h>
 #include <stdio.h>
