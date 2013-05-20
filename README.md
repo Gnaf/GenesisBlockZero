@@ -4,7 +4,7 @@ Deps on openssl cryptolib to compile
 0a. Leave default to make your own Block 0
 
     Set initial value of uint32_t startNonce = 2083236893 and uint32_t unixtime = 1231006505 
-    to generate orginal Bitcoin Block 0.
+    to generate original Bitcoin Block 0.
 
 1.
 gcc genesisblock.c into genesisgen
