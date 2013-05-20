@@ -4,7 +4,7 @@ Deps on openssl cryptolib to compile
 1.
 gcc genesisblock.c into genesisgen
 
-2. 
+2.
 ./genesisgen <PubKey> <TimeStamp> <nBits>
 
 3.
