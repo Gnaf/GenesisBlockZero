@@ -7,7 +7,7 @@ Deps on openssl cryptolib to compile
     to generate original Bitcoin Block 0 hash
 
 1.
-gcc genesisblock.c into genesisgen
+gcc genesisblock.c -o genesisgen -lcrypto
 
 2.
 ./genesisgen [PubKey] [TimeStamp] [nBits]
