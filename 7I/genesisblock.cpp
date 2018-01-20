@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -17,7 +16,8 @@ bool generateBlock = false;
 uint32_t startNonce = 0;
 uint32_t unixtime = 0;
 
-typedef struct {
+struct Transaction{
+#pragma pack(1)
 	/* Hash of Tx */
 	uint8_t merkleHash[32];
 	
@@ -41,7 +41,7 @@ typedef struct {
 	
 	/* Final */
 	uint32_t locktime;
-} Transaction;
+} ;
 
 // Got this off the internet. Am not sure if it can fail in some circumstances
 void byteswap(uint8_t *buf, int length)
