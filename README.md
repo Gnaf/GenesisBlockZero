@@ -3,7 +3,7 @@ Deps on openssl cryptolib to compile
 
 build 64-bit openssl on windows with VC, copy libcrypto.lib to say  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64  
 also copy its .h files to C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include\openssl
-and dlls to C:\Windows\System32
+and dlls to C:\Windows\System32  
 0a. Leave genesisblock.cpp to default to generate your own Block 0 hash
 
     Set initial value of uint32_t startNonce = 2083236893 and uint32_t unixtime = 1231006505 in genesisblock.c
