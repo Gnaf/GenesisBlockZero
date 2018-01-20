@@ -78,14 +78,13 @@ size_t hex2bin(unsigned char *p, const char *hexstr, size_t len)
 	size_t retlen = len;
 
 	while (*hexstr && len) {
-		char hex_byte[4];
+		char hex_byte[4]={};
 		unsigned int v;
 
 		if (!hexstr[1]) {
 			return ret;
 		}
 
-		memset(hex_byte, 0, 4);
 		hex_byte[0] = hexstr[0];
 		hex_byte[1] = hexstr[1];
 
