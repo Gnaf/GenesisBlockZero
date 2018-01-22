@@ -132,7 +132,7 @@ Transaction *InitTransaction()
 	transaction->outValue = 50*COIN;
 	
 	// We initialize the previous output to 0 as there is none
-	memset(transaction->prevOutput, 0, 32);
+	//memset(transaction->prevOutput, 0, 32);
 	
 	return transaction;
 }
