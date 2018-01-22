@@ -9,8 +9,10 @@
 //Copied from Bitcoin source
 const uint64_t COIN = 100000000;
 const uint64_t CENT = 1000000;
+#ifdef _MSC_VER
 #pragma comment(lib,"libcrypto.lib")
 #pragma comment(lib,"libssl.lib")
+#endif
 uint32_t OP_CHECKSIG = 172; // This is expressed as 0xAC
 bool generateBlock = false;
 uint32_t startNonce = 0;
