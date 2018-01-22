@@ -17,7 +17,9 @@ uint32_t startNonce = 0;
 uint32_t unixtime = 0;
 
 struct Transaction{
+#ifdef _MSC_VER
 #pragma pack(1)
+#endif
 	/* Hash of Tx */
 	uint8_t merkleHash[32];
 	
@@ -41,8 +43,11 @@ struct Transaction{
 	
 	/* Final */
 	uint32_t locktime;
+#ifdef _MSC_VER
 } ;
-
+#else
+} __attribute__(packed);
+#endif
 // Got this off the internet. Am not sure if it can fail in some circumstances
 void byteswap(uint8_t *buf, int length)
 {
@@ -209,7 +214,8 @@ int main(int argc, char *argv[])
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 4);
 		scriptSig_pos+=4;
 	}
-	
+	//below works only if structure alignment turned off .
+
 	// Important! In the Bitcoin code there is a statement 'CBigNum(4)' 
 	// i've been wondering for a while what it is but
 	// seeing as alt-coins keep it the same, we'll do it here as well
@@ -223,6 +229,8 @@ int main(int argc, char *argv[])
 	transaction->scriptSig = (uint8_t*)realloc(transaction->scriptSig, scriptSig_len*sizeof(uint8_t));
 	memcpy(transaction->scriptSig+scriptSig_pos, (const unsigned char *)timestamp, timestamp_len);
 	
+	
+
 	// Here we are asuming some values will have the same size
 	uint32_t serializedLen = 
 	4    // tx version
@@ -286,7 +294,7 @@ int main(int argc, char *argv[])
 		printf("Generating block...\n");
 		if(!unixtime)
 		{
-			unixtime = time(NULL);
+			unixtime = time(NULL); //not real unix timestamp ,dont care
 		}
 		
 		unsigned char block_header[80], block_hash1[32], block_hash2[32];
