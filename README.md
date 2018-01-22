@@ -1,7 +1,7 @@
 0.
 Deps on openssl cryptolib to compile
 
-build 64-bit openssl on windows with VC, copy `libcrypto.lib` to say  `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64`  
+build 64-bit openssl on windows with nmake , copy `libcrypto.lib` to say  `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64`  
 also copy its .h files to `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include\openssl`
 and dlls to `C:\Windows\System32`  
 
@@ -14,10 +14,10 @@ and dlls to `C:\Windows\System32`
 build solution 
  
  libux build: 
- ---
+ ```
  cd 7I
  c++ genesisblock.cpp -o genesisblock -lcrypto
- ---  
+ ```
 2.
 genesisblock [PubKey] [TimeStamp] [nBits]
 
