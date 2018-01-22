@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 #include <openssl/sha.h>
+#include <algorithm>
 
 //Copied from Bitcoin source
 const uint64_t COIN = 100000000;
@@ -53,15 +54,7 @@ struct Transaction{
 // Got this off the internet. Am not sure if it can fail in some circumstances
 void byteswap(uint8_t *buf, int length)
 {
-	int i;
-	uint8_t temp;
-
-	for(i = 0; i < length / 2; i++)
-	{
-		temp = buf[i];
-		buf[i] = buf[length - i - 1];
-		buf[length - i - 1] = temp;
-	}   
+	std::reverse(buf, buf +  length); 
 }
 
 // Following two functions are borrowed from cgminer.
@@ -147,7 +140,7 @@ int main(int argc, char *argv[])
 	
 	if((argc-1) < 3)
 	{
-		fprintf(stderr, "Usage: genesisgen [options] <pubkey> \"<timestamp>\" <nBits>\n");
+		fprintf(stderr, "Usage: genesisblock [options] <pubkey> \"<timestamp>\" <nBits>\n");
 		return 0;		
 	}
 	
@@ -167,12 +160,7 @@ int main(int argc, char *argv[])
 	}	
 
 	transaction = InitTransaction();
-	if(!transaction)
-	{
-		fprintf(stderr, "Could not allocate memory! Exiting...\n");
-		return 0;	
-	}
-	
+
 	strncpy(pubkey, argv[1], sizeof(pubkey));
 	strncpy(timestamp, argv[2], sizeof(timestamp));
 	sscanf(argv[3], "%lu", (long unsigned int *)&nBits);
