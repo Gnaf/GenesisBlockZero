@@ -7,6 +7,9 @@
 #include <openssl/sha.h>
 #include <algorithm>
 
+
+
+
 //Copied from Bitcoin source
 const uint64_t COIN = 100000000;
 const uint64_t CENT = 1000000;
@@ -116,7 +119,7 @@ Transaction *InitTransaction()
 	}
 	
 	// Set some initial data that will remain constant throughout the program
-	transaction->version = 1;
+	transaction->version = 4;
 	transaction->numInputs = 1;
 	transaction->numOutputs = 1;
 	transaction->locktime = 0;
@@ -147,7 +150,7 @@ int main(int argc, char *argv[])
 	pubkey_len = strlen(argv[1]) / 2; // One byte is represented as two hex characters, thus we divide by two to get real length.
 	timestamp_len = strlen(argv[2]);
 	
-	if(pubkey_len != 65)
+	if((pubkey_len != 65) || (strlen(argv[1])  % 2))
 	{
 		fprintf(stderr, "Invalid public key length! %s\n", argv[1]);
 		return 0;
@@ -238,7 +241,7 @@ int main(int argc, char *argv[])
 	
 	// Now let's serialize the data
 	uint32_t serializedData_pos = 0;
-	transaction->serializedData = (uint8_t *)malloc(serializedLen*sizeof(uint8_t));
+	transaction->serializedData = (uint8_t *)malloc(serializedLen);
 	memcpy(transaction->serializedData+serializedData_pos, &transaction->version, 4);
 	serializedData_pos += 4;
 	memcpy(transaction->serializedData+serializedData_pos, &transaction->numInputs, 1);
@@ -326,8 +329,7 @@ int main(int argc, char *argv[])
 			*pNonce = startNonce;
 			if(startNonce > 4294967294LL)
 			{
-				//printf("\nBlock found!\nHash: %s\nNonce: %u\nUnix time: %u", blockHash, startNonce, unixtime);
-				unixtime++;
+				unixtime++; //trick is that to change pre-start time to find a block(really it's smth else) faster then nonce wraps  instead of dealin with extranonce 
 				*pUnixtime = unixtime;
 				startNonce = 0;
 			}
