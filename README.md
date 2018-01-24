@@ -12,7 +12,12 @@ and dlls to `C:\Windows\System32`
 
 1.
 build solution 
- 
+
+libux build: 
+```
+cd 7I
+c++ genesisblock.cpp -o genesisblock -lcrypto
+```
 2.
 genesisblock [PubKey] [TimeStamp] [nBits]
 
