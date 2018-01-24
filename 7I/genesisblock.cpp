@@ -52,7 +52,7 @@ struct Transaction{
 #ifdef _MSC_VER
 } ;
 #else
-} __attribute__(packed);
+} __attribute__((packed));
 #endif
 // Got this off the internet. Am not sure if it can fail in some circumstances
 void byteswap(uint8_t *buf, int length)
