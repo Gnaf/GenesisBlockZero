@@ -290,7 +290,7 @@ int main(int argc, char *argv[])
 		}
 		
 		unsigned char block_header[80], block_hash1[32], block_hash2[32];
-		uint32_t blockversion = 1;
+		uint32_t blockversion = 4;
 		memcpy(block_header, &blockversion, 4);
 		memset(block_header+4, 0, 32);
 		byteswap(transaction->merkleHash, 32); // We swapped it before, so do it again now.
