@@ -113,11 +113,6 @@ Transaction *InitTransaction()
 	Transaction *transaction;
 	
 	transaction = (Transaction *)calloc(1, sizeof(*transaction));
-	if(!transaction)
-	{
-		return NULL;
-	}
-	
 	// Set some initial data that will remain constant throughout the program
 	transaction->version = /* drift */4;
 	transaction->numInputs = 1;
@@ -128,7 +123,6 @@ Transaction *InitTransaction()
 	transaction->outValue = 50*COIN;
 	
 	// We initialize the previous output to 0 as there is none
-	//memset(transaction->prevOutput, 0, 32);
 	
 	return transaction;
 }
@@ -215,7 +209,7 @@ int main(int argc, char *argv[])
 	transaction->scriptSig[scriptSig_pos++] = 0x01;
 	transaction->scriptSig[scriptSig_pos++] = 0x04;
 	
-	transaction->scriptSig[scriptSig_pos++] = (uint8_t)scriptSig_len;
+	transaction->scriptSig[scriptSig_pos++] = (uint8_t)scriptSig_len; // ++ here coz index one behind the length
 	
 	scriptSig_len += scriptSig_pos;
 	transaction->scriptSig = (uint8_t*)realloc(transaction->scriptSig, scriptSig_len);
