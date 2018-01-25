@@ -119,7 +119,7 @@ Transaction *InitTransaction()
 	}
 	
 	// Set some initial data that will remain constant throughout the program
-	transaction->version = 4;
+	transaction->version = /* drift */4;
 	transaction->numInputs = 1;
 	transaction->numOutputs = 1;
 	transaction->locktime = 0;
@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
 
 	// Here we are asuming some values will have the same size
 	uint32_t serializedLen = 
-	4    // tx version
+	4    // tx version  
 	+1   // number of inputs
 	+32  // hash of previous output
 	+4   // previous output's index
@@ -290,7 +290,7 @@ int main(int argc, char *argv[])
 		}
 		
 		unsigned char block_header[80], block_hash1[32], block_hash2[32];
-		uint32_t blockversion = 4;
+		uint32_t blockversion = /* drift */4;  
 		memcpy(block_header, &blockversion, 4);
 		memset(block_header+4, 0, 32);
 		byteswap(transaction->merkleHash, 32); // We swapped it before, so do it again now.
