@@ -100,7 +100,7 @@ size_t hex2bin(unsigned char *p, const char *hexstr, size_t len)
 		p++;
 		hexstr += 2;
 		len--;
-		if(*(hexstr-1)==0) break;
+		if(*(hexstr-1)==0) { hexstr--; break; }
 	}
 
 	if (len == 0 && *hexstr == 0)
