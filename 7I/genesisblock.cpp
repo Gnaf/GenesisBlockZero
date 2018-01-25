@@ -169,8 +169,8 @@ int main(int argc, char *argv[])
 	transaction->pubkeyScript =(uint8_t *)malloc(pubkey_len+2);
 	pubkeyScript_len = hex2bin(transaction->pubkeyScript+1, pubkey, pubkey_len); // No error checking, yeah.
 	transaction->pubkeyScript[0] = 0x41; // A public key is 32 bytes X coordinate, 32 bytes Y coordinate and one byte 0x04, so 65 bytes i.e 0x41 in Hex.
-	transaction->pubkeyScript[++pubkeyScript_len] = OP_CHECKSIG;
-	
+	transaction->pubkeyScript[++pubkeyScript_len] = OP_CHECKSIG; 
+	pubkeyScript_len++;
 	// Encode timestamp to binary
 	transaction->scriptSig =(uint8_t *) malloc(scriptSig_len);
 	uint32_t scriptSig_pos = 0;
