@@ -13,7 +13,7 @@ and dlls to `C:\Windows\System32`
 1.
 build solution 
 
-libux build (for non-pc - only if unaligned memory access supported) : 
+libux build (for non-pc - req unaligned memory access) : 
 ```
 cd 7I
 c++ genesisblock.cpp -o genesisblock -lcrypto
