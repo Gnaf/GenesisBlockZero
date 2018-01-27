@@ -151,7 +151,7 @@ int main(int argc, char *argv[])
 		return 0;
 	}
 	
-	if(timestamp_len > 254 || timestamp_len <= 0)
+	if(timestamp_len > 254 || timestamp_len < 1)
 	{
 		fprintf(stderr, "Size of timestamp is 0 or exceeds maximum length of 254 characters!\n");
 		return 0;
@@ -169,7 +169,7 @@ int main(int argc, char *argv[])
 	// Encode pubkey to binary and prepend pubkey size, then append the OP_CHECKSIG byte
 	transaction->pubkeyScript =(uint8_t *)malloc(pubkey_len+2);
 	pubkeyScript_len = hex2bin(transaction->pubkeyScript+1, pubkey, pubkey_len); // No error checking, yeah.
-	transaction->pubkeyScript[0] = 0x41; // A public key is 32 bytes X coordinate, 32 bytes Y coordinate and one byte 0x04, so 65 bytes i.e 0x41 in Hex.
+	transaction->pubkeyScript[0] = 0x41; //  size. A public key is 32 bytes X coordinate, 32 bytes Y coordinate and one byte 0x04, so 65 bytes i.e 0x41 in Hex.
 	transaction->pubkeyScript[++pubkeyScript_len] = OP_CHECKSIG; 
 	pubkeyScript_len++;
 	// Encode timestamp to binary
@@ -178,30 +178,30 @@ int main(int argc, char *argv[])
 	
 	
 	// This is basically how I believe the size of the nBits is calculated
-	if(nBits <= 255)
+	if(nBits < 256)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x01;
 		transaction->scriptSig[scriptSig_pos++] = (uint8_t)nBits;
 	}
-	else if(nBits <= 65535)
+	else if(nBits < 65536)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x02;
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 2);
 		scriptSig_pos+=2;
 	}	
-	else if(nBits <= 16777215)
+	else if(nBits < 16777216)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x03;
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 3);
 		scriptSig_pos+=3;
 	}
-	else //else if(nBits <= 4294967296LL)
+	else //else if(nBits < 4294967296LL)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x04;
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 4);
 		scriptSig_pos+=4;
 	}
-	//below works only if structure alignment turned off .
+	//below  works only if structure alignment turned off .
 
 	// Important! In the Bitcoin code there is a statement 'CBigNum(4)' 
 	// i've been wondering for a while what it is but
@@ -313,8 +313,8 @@ int main(int argc, char *argv[])
 			}
 			
 			startNonce++;
-			counter+=1;
-			if(time(NULL)-start >= 1)
+			counter++;
+			if(time(NULL)-start > 0)
 			{
 				printf("\r%d Hashes/s, Nonce %u\r", counter, startNonce);
 				counter = 0;
