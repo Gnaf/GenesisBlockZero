@@ -11,11 +11,13 @@ and dlls to `C:\Windows\System32`
     to generate original Bitcoin Block 0 hash
 
 1.
-build solution 
-
+windows  
+Visual Studio x64 Win64 Command Prompt
+```
+nmake
+```
 libux build (for non-pc - req unaligned memory access) : 
 ```
-cd 7I
 c++ genesisblock.cpp -o genesisblock -lcrypto
 ```
 2.
