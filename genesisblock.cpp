@@ -277,7 +277,7 @@ int main(int argc, char *argv[])
 	printf("\nCoinbase: %s\n\nPubkeyScript: %s\n\nMerkle Hash: %s\nByteswapped: %s\n",txScriptSig, pubScriptSig, merkleHash, merkleHashSwapped);
 	//unsigned int a=0xaaeef0;
 		
-	//if(generateBlock)
+
 	{	
 
 //		std::cout <<std::hex<< std::endl <<(int)p[0]<<(int)p[1]<<(int)p[2]<<std::endl ;
@@ -299,8 +299,8 @@ int main(int argc, char *argv[])
 		
 		uint32_t *pNonce = (uint32_t *)(block_header + 76);
 		uint32_t *pUnixtime = (uint32_t *)(block_header + 68);
-		unsigned int counter=0, start = time(NULL);
-	unsigned char *p=(unsigned char *)&counter ;
+		unsigned int c=0, start = time(NULL);
+		unsigned char *p=(unsigned char *)&c ;
 		while(1)
 		{
 			SHA256(block_header, 80, block_hash1);
@@ -317,11 +317,11 @@ int main(int argc, char *argv[])
 			}
 			
 			startNonce++;
-			counter++;
-			if((p[0]&133)==1 && time(NULL)-start > 0)    //Short-circuit evaluation
+			c++;
+			if((c&0xb7)==1 && time(NULL)-start > 0)    // Short-circuit evaluation
 			{
-				printf("\r%d Hashes/s, Nonce %u\r", counter, startNonce);
-				counter = 0;
+				printf("\r%d Hashes/s, Nonce %u\r", c, startNonce);
+				c = 0;
 				start = time(NULL);
 			}
 			*pNonce = startNonce;
