@@ -6,7 +6,7 @@
 #include <time.h>
 #include <openssl/sha.h>
 #include <algorithm>
-
+#include <iostream>
 
 
 
@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
 	strncpy(timestamp, argv[2], sizeof(timestamp));
 	sscanf(argv[3], "%lu", (long unsigned int *)&nBits);
 	
-	pubkey_len = strlen(pubkey) >> 1;
+	pubkey_len = strlen(pubkey) >> 1; //  half
 	scriptSig_len = timestamp_len;
 	
 	// Encode pubkey to binary and prepend pubkey size, then append the OP_CHECKSIG byte
@@ -178,18 +178,18 @@ int main(int argc, char *argv[])
 	
 	
 	// This is basically how I believe the size of the nBits is calculated
-	if(nBits < 256)
+	if(nBits < 0x100)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x01;
 		transaction->scriptSig[scriptSig_pos++] = (uint8_t)nBits;
 	}
-	else if(nBits < 65536)
+	else if(nBits < 0x10000)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x02;
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 2);
 		scriptSig_pos+=2;
 	}	
-	else if(nBits < 16777216)
+	else if(nBits < 0x1000000)
 	{
 		transaction->scriptSig[scriptSig_pos++] = 0x03;
 		memcpy(transaction->scriptSig+scriptSig_pos, &nBits, 3);
@@ -275,9 +275,12 @@ int main(int argc, char *argv[])
 	char *txScriptSig = bin2hex(transaction->scriptSig, scriptSig_len);
 	char *pubScriptSig = bin2hex(transaction->pubkeyScript, pubkeyScript_len);
 	printf("\nCoinbase: %s\n\nPubkeyScript: %s\n\nMerkle Hash: %s\nByteswapped: %s\n",txScriptSig, pubScriptSig, merkleHash, merkleHashSwapped);
-	
+	//unsigned int a=0xaaeef0;
+	//unsigned char *p=(unsigned char *)&a;	
 	//if(generateBlock)
-	{
+	{	
+
+//		std::cout <<std::hex<< std::endl <<(int)p[0]<<(int)p[1]<<(int)p[2]<<std::endl ;
 		printf("Generating block...\n");
 		if(!unixtime)
 		{
@@ -296,7 +299,8 @@ int main(int argc, char *argv[])
 		
 		uint32_t *pNonce = (uint32_t *)(block_header + 76);
 		uint32_t *pUnixtime = (uint32_t *)(block_header + 68);
-		unsigned int counter, start = time(NULL);
+		unsigned int counter=0, start = time(NULL);
+	
 		while(1)
 		{
 			SHA256(block_header, 80, block_hash1);
@@ -314,7 +318,7 @@ int main(int argc, char *argv[])
 			
 			startNonce++;
 			counter++;
-			if(time(NULL)-start > 0)
+			if((counter&13)==1 && time(NULL)-start > 0)
 			{
 				printf("\r%d Hashes/s, Nonce %u\r", counter, startNonce);
 				counter = 0;
