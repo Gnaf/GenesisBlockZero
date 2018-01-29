@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
 			
 			startNonce++;
 			counter++;
-			if((p[0]&133)==1 && time(NULL)-start > 0)
+			if((p[0]&133)==1 && time(NULL)-start > 0)    //Short-circuit evaluation
 			{
 				printf("\r%d Hashes/s, Nonce %u\r", counter, startNonce);
 				counter = 0;
