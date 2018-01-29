@@ -276,7 +276,7 @@ int main(int argc, char *argv[])
 	char *pubScriptSig = bin2hex(transaction->pubkeyScript, pubkeyScript_len);
 	printf("\nCoinbase: %s\n\nPubkeyScript: %s\n\nMerkle Hash: %s\nByteswapped: %s\n",txScriptSig, pubScriptSig, merkleHash, merkleHashSwapped);
 	//unsigned int a=0xaaeef0;
-	//unsigned char *p=(unsigned char *)&a;	
+		
 	//if(generateBlock)
 	{	
 
@@ -300,7 +300,7 @@ int main(int argc, char *argv[])
 		uint32_t *pNonce = (uint32_t *)(block_header + 76);
 		uint32_t *pUnixtime = (uint32_t *)(block_header + 68);
 		unsigned int counter=0, start = time(NULL);
-	
+	unsigned char *p=(unsigned char *)&counter ;
 		while(1)
 		{
 			SHA256(block_header, 80, block_hash1);
@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
 			
 			startNonce++;
 			counter++;
-			if((counter&13)==1 && time(NULL)-start > 0)
+			if((p[0]&133)==1 && time(NULL)-start > 0)
 			{
 				printf("\r%d Hashes/s, Nonce %u\r", counter, startNonce);
 				counter = 0;
