@@ -1,4 +1,4 @@
-[![version](https://img.shields.io/github/downloads/alexeyneu/GenesisBlockZero/total.svg?style=plastic)](https://github.com/alexeyneu/tool3/GenesisBlockZero/releases/latest)
+[![version](https://img.shields.io/github/downloads/alexeyneu/GenesisBlockZero/total.svg?style=plastic)](https://github.com/alexeyneu//GenesisBlockZero/releases/latest)
 
 
 0.
