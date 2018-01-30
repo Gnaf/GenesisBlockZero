@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
 			
 			startNonce++;
 			c++;
-			if((c&0xb7)==1 && time(NULL)-start > 0)    // Short-circuit evaluation
+			if((c & 0xbff7)==1 && time(NULL)-start > 0)    // Short-circuit evaluation
 			{
 				printf("\r%d Hashes/s, Nonce %u\r", c, startNonce);
 				c = 0;
@@ -327,7 +327,7 @@ int main(int argc, char *argv[])
 			*pNonce = startNonce;
 			if(startNonce > 4294967294LL)
 			{
-				unixtime++; //trick is that to change pre-start time to find a block(really it's smth else) faster then nonce wraps  instead of dealin with extranonce 
+				unixtime++; //trick is that to change pre-start time to find a block(really it's smth else) faster then nonce wraps 
 				*pUnixtime = unixtime;
 				startNonce = 0;
 			}
