@@ -1,3 +1,6 @@
+[![version](https://img.shields.io/github/downloads/alexeyneu/GenesisBlockZero/total.svg?style=plastic)](https://github.com/alexeyneu/tool3/GenesisBlockZero/releases/latest)
+
+
 0.
 Deps on openssl cryptolib to compile
 
