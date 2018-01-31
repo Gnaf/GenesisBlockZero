@@ -7,10 +7,14 @@ linux - `libcrypto` (openssl package)
 windows - `libcrypto-1_1-x64.dll`  ( ... )
 
 build req:
-windows  
+windows 
+ms visual studio(C++)   
 build 64-bit openssl on windows with nmake , copy `libcrypto.lib` to say  `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64`  
 also copy its .h files to `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include\openssl`
-and dlls to `C:\Windows\System32`  
+and dlls to `C:\Windows\System32`
+
+didnt test it with msys but nothing stops it from build there i guess   
+
 linux  
 `sudo apt install libssl-*`
 0a. Leave genesisblock.cpp to default to generate your own Block 0 hash
