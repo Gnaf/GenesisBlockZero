@@ -4,7 +4,7 @@
 0.
 run req:  
 linux - `libcrypto` (openssl package)  
-windows - `libcrypto.dll`  
+windows - `libcrypto-1_1-x64.dll`  ( ... )
 
 build req:
 windows  
