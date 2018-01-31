@@ -9,7 +9,7 @@ windows - `libcrypto-1_1-x64.dll`  ( ... )
 build req:
 windows 
 ms visual studio(C++)   
-build 64-bit openssl on windows with nmake , copy `libcrypto.lib` to say  `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64`  
+build 64-bit openssl with `nmake` ( their makefile has nmake support ) , copy `libcrypto.lib` to say  `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Lib\x64`  
 also copy its .h files to `C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Include\openssl`
 and dlls to `C:\Windows\System32`
 
