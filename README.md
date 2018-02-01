@@ -16,12 +16,13 @@ and dlls to `C:\Windows\System32`
 didnt test it with msys but nothing stops it from build there i guess   
 
 linux  
-`sudo apt install libssl-*`
-0a. Leave genesisblock.cpp to default to generate your own Block 0 hash
+`sudo apt install libssl-*`  
+0a. Leave genesisblock.cpp to default to generate your own Block 0 hash  
 
-    Set initial value of uint32_t startNonce = 2083236893 and uint32_t unixtime = 1231006505 in genesisblock.cpp 
+    Set initial value of uint32_t startNonce = 2083236893 and uint32_t unixtime = 1231006505 in genesisblock.cpp  
     to generate original Bitcoin Block 0 hash
 
+	 tx and block versions are hardcoded with `drift` comment.
 1.
 windows  
 Visual Studio x64 Win64 Command Prompt

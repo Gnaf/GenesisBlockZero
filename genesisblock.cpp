@@ -13,14 +13,18 @@
 //Copied from Bitcoin source
 const uint64_t COIN = 100000000;
 const uint64_t CENT = 1000000;
+
+//Visual C++
 #ifdef _MSC_VER
 #pragma comment(lib,"libcrypto.lib")
 #pragma comment(lib,"libssl.lib")
 #endif
+
 uint32_t OP_CHECKSIG = 172; // This is expressed as 0xAC
 bool generateBlock = false;
 uint32_t startNonce = 0;
 uint32_t unixtime = 0;
+
 
 struct Transaction{
 #ifdef _MSC_VER
@@ -54,6 +58,7 @@ struct Transaction{
 #else
 } __attribute__((packed));
 #endif
+
 // Got this off the internet. Am not sure if it can fail in some circumstances
 void byteswap(uint8_t *buf, int length)
 {
